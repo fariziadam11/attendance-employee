@@ -93,7 +93,10 @@ export interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
   error: string | null;
+  login: (email: string, password: string) => Promise<void>;
+  register: (email: string, password: string, name: string, role?: 'admin' | 'employee') => Promise<{ success: boolean; error?: unknown }>;
+  logout: () => Promise<void>;
+  checkSession: () => Promise<void>;
+  updateProfile: (userData: Partial<User>) => Promise<{ success: boolean; error?: string | unknown }>;
 }

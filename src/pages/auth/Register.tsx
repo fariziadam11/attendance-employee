@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Eye, EyeOff, UserPlus } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useAuthStore } from '../../stores/authStore';
 
 interface RegisterFormValues {
   name: string;
@@ -12,6 +13,8 @@ interface RegisterFormValues {
 }
 
 const Register: React.FC = () => {
+  const navigate = useNavigate();
+  const { register: registerUser, error } = useAuthStore();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,11 +31,21 @@ const Register: React.FC = () => {
   const onSubmit = async (data: RegisterFormValues) => {
     setIsLoading(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      toast.error("Registration is currently disabled. Please use demo accounts to login.");
+    try {
+      const result = await registerUser(data.email, data.password, data.name);
+      
+      if (result.success) {
+        toast.success('Registration successful! You can now log in.');
+        navigate('/login');
+      } else {
+        toast.error(result.error instanceof Error ? result.error.message : 'Registration failed');
+      }
+    } catch (err) {
+      toast.error('An error occurred during registration');
+      console.error(err);
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
   
   return (
@@ -53,6 +66,11 @@ const Register: React.FC = () => {
       
       <div className="mx-auto mt-8 w-full max-w-md">
         <div className="card bg-white px-8 py-8 shadow dark:bg-gray-800">
+          {error && (
+            <div className="mb-4 rounded-md bg-error/10 p-3 text-sm text-error">
+              {error}
+            </div>
+          )}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div>
               <label htmlFor="name" className="form-label">

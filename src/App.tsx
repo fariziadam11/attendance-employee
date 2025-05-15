@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { useAuthStore } from './stores/authStore';
@@ -22,16 +22,15 @@ import Settings from './pages/settings/Settings';
 import NotFound from './pages/NotFound';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import AdminRoute from './components/auth/AdminRoute';
-import { initializeMockData } from './utils/mockData';
 
 function App() {
-  const { isAuthenticated, isLoading, user } = useAuthStore();
+  const { isAuthenticated, isLoading, checkSession } = useAuthStore();
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   
-  // Initialize mock data for demo purposes
+  // Check for existing Supabase session on app load
   useEffect(() => {
-    initializeMockData();
-  }, []);
+    checkSession();
+  }, [checkSession]);
 
   // Theme handling
   useEffect(() => {
