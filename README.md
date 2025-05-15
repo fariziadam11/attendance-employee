@@ -1,131 +1,137 @@
-# Employee Attendance System with Supabase
+# Project Attendance System
 
-A complete employee attendance management system built with React and Supabase, featuring authentication, attendance tracking, leave management, salary processing, and more.
+A modern, React-based attendance management system with real-time tracking capabilities and intuitive user interface. This system helps organizations efficiently manage attendance records, generate reports, and analyze attendance patterns.
 
 ## Features
 
-- **Authentication**: Secure login and registration with Supabase Auth
-- **Employee Management**: Add, edit, and manage employee profiles
-- **Attendance Tracking**: Track check-ins and check-outs with QR code support
-- **Leave Management**: Request and approve leave applications
-- **Salary Management**: Process and track employee salaries
-- **Overtime Tracking**: Record and approve overtime hours
-- **Holiday Calendar**: Manage company holidays
-- **Reports**: Generate attendance and payroll reports
-- **Dark/Light Mode**: Support for theme preferences
+- User authentication with role-based access control
+- Real-time attendance tracking with QR code support
+- Interactive dashboard with attendance analytics and charts
+- Customizable attendance reports with export options (PDF, CSV)
+- Employee/Student management system
+- Email notifications for attendance updates
+- Mobile-responsive design
 
 ## Tech Stack
 
-- React with TypeScript
-- Supabase for backend (Auth, Database, Storage)
-- TailwindCSS for styling
-- React Router for navigation
-- Zustand for state management
-- React Hook Form for form handling
-- Chart.js for data visualization
-- jsPDF for report generation
+- Frontend: React.js, Material-UI
+- State Management: Redux Toolkit
+- Database: MySQL
+- Authentication: JWT
+- API: RESTful architecture
+- Charts: Recharts
+- Testing: Jest & React Testing Library
 
-## Setup Instructions
+## Prerequisites
 
-### Prerequisites
-
-- Node.js (v18+)
+- Node.js (v14 or higher)
 - npm or yarn
-- Supabase account
+- Modern web browser
 
-### Supabase Setup
+## Installation
 
-1. Create a new Supabase project
-2. Set up the database schema:
-   - Navigate to the SQL Editor in your Supabase dashboard
-   - Run the SQL script from `supabase/migrations/20250515_initial_schema.sql`
-3. Get your Supabase URL and anon key from the project settings
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd project-attendance
+```
 
-### Environment Setup
-
-1. Create a `.env` file in the project root with the following variables:
-   ```
-   VITE_SUPABASE_URL=your_supabase_url
-   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-   ```
-
-### Installation
-
-1. Clone the repository
 2. Install dependencies:
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
+```bash
+npm install
+# or
+yarn install
+```
+
 3. Start the development server:
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
+```bash
+npm start
+# or
+yarn start
+```
 
-## Usage
+## Environment Setup
 
-### Authentication
+Create a `.env` file in the root directory:
 
-The system comes with two default users:
-- Admin: admin@company.com / admin123
-- Employee: employee@company.com / employee123
+```env
+REACT_APP_API_URL=http://localhost:3001
+REACT_APP_VERSION=1.0.0
+```
 
-You can register new users through the registration page.
+## Available Scripts
 
-### Employee Management
+```bash
+npm start      # Start development server
+npm test      # Run test suite
+npm run build # Create production build
+npm run lint  # Run ESLint
+```
 
-Admins can:
-- Add new employees
-- Edit employee details
-- Deactivate/activate employees
+## Project Structure
 
-### Attendance Management
+```
+project-attendance/
+├── src/
+│   ├── components/      # Reusable UI components
+│   ├── pages/          # Route components
+│   ├── contexts/       # React contexts
+│   ├── services/       # API services
+│   ├── store/         # Redux store
+│   ├── hooks/         # Custom hooks
+│   ├── utils/         # Helper functions
+│   └── types/         # TypeScript definitions
+├── public/
+├── tests/
+└── package.json
+```
 
-- Employees can check in/out using the QR scanner
-- Admins can generate QR codes for attendance
-- View attendance records and reports
+## API Documentation
 
-### Leave Management
+API endpoints are available at:
+- POST `/api/auth/login` - User authentication
+- GET `/api/attendance` - Fetch attendance records
+- POST `/api/attendance` - Record new attendance
 
-- Employees can request leave
-- Admins can approve/reject leave requests
-- Track leave balances
+## Contributing
 
-### Salary Management
+1. Fork the repository
+2. Create a new branch
+3. Make your changes
+4. Submit a pull request
 
-- Calculate salaries based on attendance and overtime
-- Process monthly payroll
-- Generate salary slips
+## Testing
 
-## Database Schema
+```bash
+# Run all tests
+npm test
 
-The Supabase database includes the following tables:
-- users
-- employees
-- attendance
-- leave_requests
-- holidays
-- overtime
-- salaries
-- departments
-- positions
+# Run tests with coverage
+npm test -- --coverage
+```
 
-## API Services
+## Deployment
 
-The application includes service modules for each feature:
-- Authentication service
-- Employee service
-- Attendance service
-- Leave service
-- Salary service
-- Overtime service
-- Holiday service
-- Department service
-- Position service
+1. Build the production bundle:
+```bash
+npm run build
+```
+
+2. Deploy to your hosting service:
+```bash
+npm run deploy
+```
+
+## Support
+
+For support, email: support@example.com
 
 ## License
 
-MIT
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- React.js team
+- Material-UI
+- All contributors
